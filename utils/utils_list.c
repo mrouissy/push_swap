@@ -5,11 +5,6 @@ node *add_new(int val)
 	node *new;
 
 	new = (node *)malloc(sizeof(node));
-	if(!new)
-	{
-		write(2,"Error\n",7);
-		return(1);
-	}
 	new->data=val;
 	new->next=NULL;
 	return (new);

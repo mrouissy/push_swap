@@ -31,7 +31,7 @@ static int ft_wordlen(char *str, int i)
 	return (len);
 }
 
-char **ft_split(char *str)
+char **ft_split(char *str,char c)
 {
 	int i = 0, j = 0, k, inword = 0;
 	char **res = (char **)malloc((ft_wc(str)) * sizeof(char *));
@@ -39,15 +39,15 @@ char **ft_split(char *str)
 		return (0);
 	while (str[i])
 	{
-		if (!(str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
+		if (str[i] != c)
 		{
 			if (!inword)
 			{
-				res[j] = (char *)malloc(1000);
+				res[j] = (char *)malloc(ft_wordlen(str,i));
 				if (!res[j])
 					return (0);
 				k = 0;
-				while (str[i] && !(str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
+				while (str[i] && str[i] != c)
 					res[j][k++] = str[i++];
 				res[j++][k] = '\0';
 				inword = 1;
