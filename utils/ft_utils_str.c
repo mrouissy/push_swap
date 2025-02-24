@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_utils_str.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/19 14:32:29 by mrouissy          #+#    #+#             */
+/*   Updated: 2025/02/20 13:25:56 by mrouissy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/push_swap.h"
 
 size_t ft_strlen(char *str)
@@ -26,16 +38,11 @@ long	ft_atol(char	*str)
 	if(str[i] == '-' || str[i] == '+')
 	{
 		write(2,"Error sign\n",12);
-		exit(1);
+		return (0);
 	}
 	while (str[i] >='0' && str[i] <= '9')
 	{
 		res = res * 10 + (str[i++] - 48);
-	}
-	if((res * sign) < INT_MIN || (res * sign) > INT_MAX)
-	{
-		write(2,"Error limits\n",14);
-		exit(1);
 	}
 	return (res * sign);
 }
