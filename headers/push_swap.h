@@ -23,6 +23,7 @@
 typedef struct s_node
 {
 	int data;
+	int index;//rank
 	struct s_node *next;
 
 } t_node;
@@ -37,6 +38,7 @@ void ft_lstclear(t_node **lst);
 t_node *add_new(int val);
 void ft_push(t_node **from, t_node **to);
 t_node *ft_last(t_node *lst);
+int is_dup(t_node *stack,int data);
 //------------------------------------------//
 
 // mouves---------------------------//
@@ -54,8 +56,9 @@ void rrr(t_node **a, t_node **b, int i);
 //--------------------------------//
 
 //sort -------------------------//
-//int is_sorted(t_node *stack);
+int is_sorted(t_node *stack);
 void sort_tree(t_node **stack);
+void rank_stack(t_node *stack);
 //------------------------------//
 
 // str functions-----------------//

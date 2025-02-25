@@ -17,6 +17,7 @@ void ft_rotate(t_node **stack)
 		return;
 	t_node *head = *stack;
 	*stack = (*stack)->next;
+    head->next = NULL;
 	ft_add_back(stack,head);
 }
 

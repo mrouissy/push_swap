@@ -14,20 +14,20 @@
 
 void free_split(char **split)
 {
-    int i = 0;
+	int i = 0;
 
-    if (!split)
-        return;
-    while (split[i])
-    {
-        free(split[i]);
-        i++;
-    }
-    free(split);
+	if (!split)
+		return;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
 
 void handle_error(t_node **stack_a)
 {
-    write(2, "Error\n", 6);
-    ft_lstclear(stack_a);
+	write(2, "Error\n", 6);
+	ft_lstclear(stack_a);
 }

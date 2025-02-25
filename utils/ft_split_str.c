@@ -43,41 +43,40 @@ static int ft_wordlen(char *str, int i)
 	return (len);
 }
 
-
 char **ft_split(char *str, char c)
 {
-    int i = 0, j = 0, k, inword = 0;
-    char **res = (char **)malloc((ft_wc(str) + 1) * sizeof(char *));
-    if (!res)
-        return (0);
-    while (str[i])
-    {
-        if (str[i] != c)
-        {
-            if (!inword)
-            {
-                res[j] = (char *)malloc(ft_wordlen(str, i) + 1);
-                if (!res[j])
-                {
-                    while (--j >= 0)
-                        free(res[j]);
-                    free(res);
-                    return (NULL);
-                }
-                k = 0;
-                while (str[i] && str[i] != c)
-                    res[j][k++] = str[i++];
-                res[j][k] = '\0';
-                j++;
-                inword = 1;
-            }
-        }
-        else
-        {
-            inword = 0;
-            i++;
-        }
-    }
-    res[j] = NULL;
-    return (res);
+	int i = 0, j = 0, k, inword = 0;
+	char **res = (char **)malloc((ft_wc(str) + 1) * sizeof(char *));
+	if (!res)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] != c)
+		{
+			if (!inword)
+			{
+				res[j] = (char *)malloc(ft_wordlen(str, i) + 1);
+				if (!res[j])
+				{
+					while (--j >= 0)
+						free(res[j]);
+					free(res);
+					return (NULL);
+				}
+				k = 0;
+				while (str[i] && str[i] != c)
+					res[j][k++] = str[i++];
+				res[j][k] = '\0';
+				j++;
+				inword = 1;
+			}
+		}
+		else
+		{
+			inword = 0;
+			i++;
+		}
+	}
+	res[j] = NULL;
+	return (res);
 }

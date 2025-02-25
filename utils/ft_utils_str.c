@@ -24,7 +24,7 @@ long	ft_atol(char	*str)
 {
 	int	i;
 	int	sign;
-	int	res;
+	long	res;
 
 	i = 0;
 	res = 0;
@@ -38,13 +38,14 @@ long	ft_atol(char	*str)
 	}
 	if(str[i] == '-' || str[i] == '+')
 	{
-		write(2,"Error sign\n",12);
-		return (0);
+		return (LONG_MAX);
 	}
 	while (str[i] >='0' && str[i] <= '9')
 	{
 		res = res * 10 + (str[i++] - 48);
 	}
+	if ((sign * res ) > INT_MAX || (sign * res) < INT_MIN)
+		return (LONG_MAX);
 	return (res * sign);
 }
 int	ft_isdigit(char i)

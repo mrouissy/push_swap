@@ -14,41 +14,50 @@
 
 int is_valid(char *str)
 {
-    int i = 0, j = 0;
-    char **res = ft_split(str, ' ');
-    if (!res)
-        return 0;
-    while (res[i])
-    {
-        j = 0;
-        while (res[i][j])
-        {
-            if (ft_isdigit(res[i][j]) == 0)
-            {
-                free_split(res);
-                return 0;
-            }
-            j++;
-        }
-        i++;
-    }
-    if (i == 0)
-    {
-        free_split(res);
-        return 0;
-    }
-    free_split(res);
-    return i;
+	int i = 0, j = 0;
+	char **res = ft_split(str, ' ');
+	if (!res)
+		return 0;
+	while (res[i])
+	{
+		j = 0;
+		while (res[i][j])
+		{
+			if (ft_isdigit(res[i][j]) == 0)
+			{
+				free_split(res);
+				return 0;
+			}
+			j++;
+		}
+		i++;
+	}
+	if (i == 0)
+	{
+		free_split(res);
+		return 0;
+	}
+	free_split(res);
+	return i;
 }
 
 void ft_printList(t_node *head)
 {
-    int i = 1;
+	int i = 1;
 	while(head)
 	{
-        printf ("%d:%d\n",i++,head->data);
+		printf ("%d->%d:%d\n",i++,head->index,head->data);
 		head = head->next;
 	}
 }
 
-
+int is_dup(t_node *stack,int data)
+{
+	while (stack)
+	{
+		if(stack->data == data)
+			return 1;
+		stack = stack->next;
+	}
+	return (0);
+}

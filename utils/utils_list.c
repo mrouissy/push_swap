@@ -32,6 +32,7 @@ t_node *ft_last(t_node *lst)
 	}
 	return lst;
 }
+
 int ft_size(t_node *lst)
 {
 	int i = 0;
@@ -45,18 +46,19 @@ int ft_size(t_node *lst)
 
 void ft_add_back(t_node **lst, t_node *new)
 {
-    t_node *lt = NULL;
-    if(lst)
-    {
-        if(*lst)
-        {
-            lt = ft_last(*lst);
-            lt->next = new;
-        }
-        else
-            *lst = new;
-    }
+	t_node *lt = NULL;
+	if(lst)
+	{
+		if(*lst)
+		{
+			lt = ft_last(*lst);
+			lt->next = new;
+		}
+		else
+			*lst = new;
+	}
 }
+
 void	ft_lstclear(t_node **lst)
 {
 	t_node	*current;
@@ -76,14 +78,13 @@ void	ft_lstclear(t_node **lst)
 
 int fill_stack(t_node **stack, char *value)
 {
-    long num = ft_atol(value);
-    if (num > INT_MAX || num < INT_MIN)
-    {
-        write(2, "Error\n", 6);
-        return 0;
-    }
-    ft_add_back(stack, add_new((int)num));
-    return 1;
+	long num = ft_atol(value);
+	if (num == LONG_MAX)
+		return 0;
+	if(is_dup(*stack, (int)num) == 1)
+		return 0;
+	ft_add_back(stack, add_new((int)num));
+	return 1;
 }
 void ft_add_front(t_node **head,t_node *new)
 {
