@@ -24,3 +24,16 @@ void ft_push(t_node **from, t_node **to)
 	else
 		ft_add_front(to, temp);
 }
+void pa(t_node **a, t_node **b, int i)
+{
+	ft_push(b, a);
+	if(i)
+		write(1, "pa\n", 3);
+}
+void pb(t_node **a, t_node **b, int i)
+{
+	ft_push(a, b);
+	if(i)
+		write(1, "pb\n", 3);
+}
+

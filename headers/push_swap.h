@@ -19,14 +19,16 @@
 //to remove
 #include <stdio.h>
 
-// linked list
+// linked list struct----------//
 typedef struct s_node
 {
 	int data;
 	struct s_node *next;
-} t_node;
 
-// void 	add_front(t_node **lst, t_node *new);
+} t_node;
+//------------------------------//
+
+// linked list functions -------------------//
 int  fill_stack(t_node **stack, char *value);
 void ft_add_back(t_node **lst, t_node *new);
 void ft_add_front(t_node **lst, t_node *new);
@@ -35,19 +37,34 @@ void ft_lstclear(t_node **lst);
 t_node *add_new(int val);
 void ft_push(t_node **from, t_node **to);
 t_node *ft_last(t_node *lst);
+//------------------------------------------//
 
-void ft_swap(t_node **from, t_node **to);
-void ft_rotate(t_node **stack);
-void ft_rrotate(t_node **stack);
+// mouves---------------------------//
+void sb(t_node **stack, int i);
+void sa(t_node **stack, int i);
+void ss(t_node **a,t_node **b, int i);
+void pa(t_node **a, t_node **b, int i);
+void pb(t_node **a, t_node **b, int i);
+void ra(t_node **a, int i);
+void rb(t_node **b, int i);
+void rr(t_node **a, t_node **b, int i);
+void rra(t_node **a, int i);
+void rrb(t_node **b, int i);
+void rrr(t_node **a, t_node **b, int i);
+//--------------------------------//
 
-// functions
+//sort -------------------------//
+//int is_sorted(t_node *stack);
+void sort_tree(t_node **stack);
+//------------------------------//
+
+// str functions-----------------//
 void free_split(char **split);
+void handle_error(t_node **stack_a);
 size_t ft_strlen(char *str);
 char **ft_split(char *str, char c);
 long ft_atol(char *str);
 int ft_isdigit(char i);
-int is_int(char *str);
-int is_int(char *str);
 int is_valid(char *str);
-
+//---------------------------------//
 #endif

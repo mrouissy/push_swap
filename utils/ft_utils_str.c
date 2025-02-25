@@ -19,6 +19,7 @@ size_t ft_strlen(char *str)
 		i++;
 	return (i);
 }
+//./push_swap 4+5+6+7 error must hnadel
 long	ft_atol(char	*str)
 {
 	int	i;

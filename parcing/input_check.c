@@ -11,63 +11,36 @@
 /* ************************************************************************** */
 
 #include "../headers/push_swap.h"
-#include <stdio.h>
 
 int is_valid(char *str)
 {
-    int len = 0, i = 0, j = 0;
-    int return_value;
+    int i = 0, j = 0;
     char **res = ft_split(str, ' ');
-
-    if(!res)
+    if (!res)
         return 0;
-
-    while(res[len])
-        len++;
-
-    if(len > 1)
+    while (res[i])
     {
-        while(res[i])
+        j = 0;
+        while (res[i][j])
         {
-            j = 0;
-            while(res[i][j])
-            {
-                if(ft_isdigit(res[i][j]) == 0)
-                {
-                    free_split(res);
-                    return 0;
-                }
-                j++;
-            }
-            i++;
-        }
-    }
-    else
-    {
-        while(res[0][j])
-        {
-            if(ft_isdigit(res[0][j]) == 0)
+            if (ft_isdigit(res[i][j]) == 0)
             {
                 free_split(res);
                 return 0;
             }
             j++;
         }
+        i++;
     }
-    return_value = (len > 1) ? len : 1;
+    if (i == 0)
+    {
+        free_split(res);
+        return 0;
+    }
     free_split(res);
-    return return_value;
+    return i;
 }
 
-int is_int(char *str)
-{
-	int len = ft_strlen(str);
-	if(len > 11)
-	{
-		return(0);
-	}
-	return(1);
-}
 void ft_printList(t_node *head)
 {
     int i = 1;

@@ -12,12 +12,33 @@
 
 #include "../headers/push_swap.h"
 
-void ft_swap(t_node **from, t_node **to)
+void ft_swap(t_node **stack)
 {
-	t_node *tmp1 = *from;
-	t_node *tmp2 = *to;
-	*from = (*from)->next;
-	*to = (*to)->next;
-	ft_add_front(from,tmp2);
-	ft_add_front(to,tmp1);
+	if (*stack == NULL || (*stack)->next == NULL)
+		return;
+	t_node *first = *stack;
+	t_node *second = (*stack)->next;
+	first->next = second->next;
+	second->next = first;
+	*stack = second;
+}
+
+void sa(t_node **stack, int i)
+{
+	ft_swap(stack);
+	if(i)
+		write(1, "sa\n", 3);
+}
+void sb(t_node **stack, int i)
+{
+	ft_swap(stack);
+	if(i)
+		write(1, "sb\n", 3);
+}
+void ss(t_node **a,t_node **b, int i)
+{
+	sa(a,0);
+	sb(b,0);
+	if(i)
+		write(1, "ss\n", 3);
 }

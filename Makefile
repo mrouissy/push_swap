@@ -6,9 +6,10 @@ CFLAGS = -Wall -Wextra -Werror
 
 src =	push_swap.c \
 		moves/ft_push.c moves/ft_rotate.c moves/ft_swap.c \
-		parcing/input_check.c \
 		utils/ft_split_str.c utils/ft_utils_str.c utils/utils_list.c \
-		parcing/error.c \
+		parcing/input_check.c parcing/error.c \
+		sort/sort.c
+
 
 obj = $(src:.c=.o)
 
