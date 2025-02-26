@@ -43,27 +43,27 @@ int process_argument(t_node **stack_a, char *arg)
 	return 1;
 }
 
-int main()
+int main(int ac, char **av)
 {
 
-	// int i = 1;
-	// t_node *stack_a = NULL,*stack_b = NULL;
-	// if(is_sorted(stack_a) ==  0)
-	// 	return 0;
-	// if(lst_size(stack_a) == 2)
-	// 	sa(&stack_a,1);
-	// else if (ac > 1)
-	// {
-	// 	while (av[i])
-	// 	{
-	// 		if (!process_argument(&stack_a, av[i]))
-	// 			return 1;
-	// 		i++;
-	// 	}
-	// 	rank_stack(stack_a);
-	// 	algo(&stack_a,&stack_b);
-	// }
-	// return 0;
+	int i = 1;
+	t_node *stack_a = NULL,*stack_b = NULL;
+	if(is_sorted(stack_a) ==  0)
+		return 0;
+	if(lst_size(stack_a) == 2)
+		sa(&stack_a,1);
+	else if (ac > 1)
+	{
+		while (av[i])
+		{
+			if (!process_argument(&stack_a, av[i]))
+				return 1;
+			i++;
+		}
+		rank_stack(stack_a);
+		algo(&stack_a,&stack_b);
+	}
+	return 0;
 }
 //check if -60 -
 //check if -6-
