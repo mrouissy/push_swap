@@ -40,7 +40,7 @@ int is_valid(char *str)
 	free_split(res);
 	return i;
 }
-
+// remove
 void ft_printList(t_node *head)
 {
 	int i = 1;

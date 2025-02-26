@@ -22,6 +22,17 @@ t_node *add_new(int val)
 	return (new);
 }
 
+int lst_size(t_node *lst)
+{
+    int i = 0;
+    while (lst)
+    {
+        i++;
+        lst = lst->next;
+    }
+    return i;
+}
+
 t_node *ft_last(t_node *lst)
 {
 	while (lst)

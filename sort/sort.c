@@ -14,20 +14,8 @@ int is_sorted(t_node *stack)
 	return 1;
 }
 
-
-
-void	sort_tree(t_node **stack)
+static void	sort_three_elements(t_node **stack, int first, int second, int third)
 {
-	int	first;
-	int	second;
-	int	third;
-
-	if (!stack || !(*stack) || !(*stack)->next || !(*stack)->next->next)
-		return;
-	first = (*stack)->data;
-	second = (*stack)->next->data;
-	third = (*stack)->next->next->data;
-
 	if (first > second && second > third && first > third)
 	{
 		ra(stack, 1);
@@ -47,8 +35,28 @@ void	sort_tree(t_node **stack)
 	}
 	else if (first < second && second > third && first > third)
 		rra(stack, 1);
+	else
+		return;
 }
 
+void	sort_tree(t_node **stack)
+{
+	if (is_sorted(*stack))
+		return;
+
+	if(lst_size(*stack) == 2)
+	{
+		if ((*stack)->data > (*stack)->next->data)
+			sa(stack, 1);
+		return;
+	}
+	if (!stack || !(*stack) || !(*stack)->next || !(*stack)->next->next)
+		return;
+	int	first = (*stack)->data;
+	int	second = (*stack)->next->data;
+	int	third = (*stack)->next->next->data;
+	sort_three_elements(stack, first, second, third);
+}
 void rank_stack(t_node *stack)
 {
 	t_node	*tmp;

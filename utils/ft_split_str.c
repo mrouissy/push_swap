@@ -17,7 +17,7 @@ static int ft_wc(char *str)
 	int i = 0, wc = 0, in_word = 0;
 	while (str[i])
 	{
-		if (!(str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
+		if (!(str[i] == ' ' || str[i] == '\t'))
 		{
 			if (!in_word)
 			{
@@ -35,7 +35,7 @@ static int ft_wc(char *str)
 static int ft_wordlen(char *str, int i)
 {
 	int len = 0;
-	while (str[i] && !(str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
+	while (str[i] && !(str[i] == ' ' || str[i] == '\t'))
 	{
 		i++;
 		len++;

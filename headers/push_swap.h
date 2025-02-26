@@ -31,6 +31,7 @@ typedef struct s_node
 
 // linked list functions -------------------//
 int  fill_stack(t_node **stack, char *value);
+int lst_size(t_node *lst);
 void ft_add_back(t_node **lst, t_node *new);
 void ft_add_front(t_node **lst, t_node *new);
 void ft_printList(t_node *head);
@@ -59,6 +60,10 @@ void rrr(t_node **a, t_node **b, int i);
 int is_sorted(t_node *stack);
 void sort_tree(t_node **stack);
 void rank_stack(t_node *stack);
+//------------------------------//
+//algo--------------------------//
+void algo(t_node **a, t_node **b);
+
 //------------------------------//
 
 // str functions-----------------//

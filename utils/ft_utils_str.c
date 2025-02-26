@@ -44,7 +44,7 @@ long	ft_atol(char	*str)
 	{
 		res = res * 10 + (str[i++] - 48);
 	}
-	if ((sign * res ) > INT_MAX || (sign * res) < INT_MIN)
+	if ((sign * res ) > INT_MAX || (sign * res) < INT_MIN || str[i] != '\0')
 		return (LONG_MAX);
 	return (res * sign);
 }
