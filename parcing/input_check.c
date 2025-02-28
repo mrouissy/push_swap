@@ -6,36 +6,41 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:32:21 by mrouissy          #+#    #+#             */
-/*   Updated: 2025/02/23 14:16:20 by mrouissy         ###   ########.fr       */
+/*   Updated: 2025/02/27 10:59:51 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap.h"
 
+static int check_isdig(char *str)
+{
+	int i = 0;
+
+	if(str[i] == '-' || str[i] == '+')
+		i++;
+	while(str[i])
+	{
+		if(!ft_isdigit(str[i]))
+			return 0;
+		i++;
+	}
+	return 1;
+}
+
 int is_valid(char *str)
 {
-	int i = 0, j = 0;
+	int i = 0;
 	char **res = ft_split(str, ' ');
 	if (!res)
 		return 0;
 	while (res[i])
 	{
-		j = 0;
-		while (res[i][j])
+		if(!check_isdig(res[i]))
 		{
-			if (ft_isdigit(res[i][j]) == 0)
-			{
-				free_split(res);
-				return 0;
-			}
-			j++;
+			free_split(res);
+			return 0;
 		}
 		i++;
-	}
-	if (i == 0)
-	{
-		free_split(res);
-		return 0;
 	}
 	free_split(res);
 	return i;
@@ -43,10 +48,11 @@ int is_valid(char *str)
 // remove
 void ft_printList(t_node *head)
 {
-	int i = 1;
+	//int i = 1;
 	while(head)
 	{
-		printf ("%d->%d:%d\n",i++,head->index,head->data);
+		//printf ("%d->%d:%d--tar-->%d\n", i++, head->index, head->data, head->target ? head->target->data : -1);
+		printf("%d\n",head->data);
 		head = head->next;
 	}
 }

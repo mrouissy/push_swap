@@ -26,8 +26,9 @@ void free_split(char **split)
 	free(split);
 }
 
-void handle_error(t_node **stack_a)
+void handle_error(t_node **stack_a, t_node **stack_b)
 {
 	write(2, "Error\n", 6);
 	ft_lstclear(stack_a);
+	ft_lstclear(stack_b);
 }

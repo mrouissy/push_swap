@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:32:33 by mrouissy          #+#    #+#             */
-/*   Updated: 2025/02/23 13:44:43 by mrouissy         ###   ########.fr       */
+/*   Updated: 2025/02/27 10:53:55 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,11 @@ void	ft_lstclear(t_node **lst)
 
 int fill_stack(t_node **stack, char *value)
 {
+	if(value[1] == '\0' && (value[0] == '-' || value[0] == '+'))
+		return 0;
 	long num = ft_atol(value);
+	if(num == LONG_MAX)
+		return 0;
 	if (num == LONG_MAX)
 		return 0;
 	if(is_dup(*stack, (int)num) == 1)

@@ -1,87 +1,132 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   turk.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 11:20:29 by mrouissy          #+#    #+#             */
+/*   Updated: 2025/02/27 11:20:30 by mrouissy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/push_swap.h"
 
-
-static int find_min_position(t_node *a)
+static void push_all_to_b(t_node **a, t_node **b)
 {
-	t_node *current = a;
-	int min_index = INT_MAX;
-	int min_position = 0;
-	int position = 0;
-
-	while (current)
-	{
-		if (current->index < min_index)
-		{
-			min_index = current->index;
-			min_position = position;
-		}
-		current = current->next;
-		position++;
-	}
-
-	return min_position;
+    int piv;
+    if(lst_size(*a) > 3)
+    {
+        while(lst_size(*a) != 3)
+        {
+            rank_stack(*a);
+            piv = lst_size(*a) / 2;
+            while (*a && (*a)->index >= piv)
+                ra(a, 1);
+            pb(a, b, 1);
+        }
+    }
 }
 
-
-static void move_min_to_top(t_node **a, int min_position)
+static void fill_pos(t_node *tmp)
 {
-	int size = lst_size(*a);
-	int i;
+    int i;
+    i = 0;
+    while (tmp)
+    {
+        tmp->pos = i;
+        tmp = tmp->next;
+        i++;
+    }
+}
 
-	if (min_position <= size / 2) {
-		i = 0;
-		while (i < min_position) {
-			ra(a, 1);
-			i++;
-		}
-	} else {
-		i = 0;
-		while (i < size - min_position) {
-			rra(a, 1);
-			i++;
-		}
-	}
-}
-static void push_all_b(t_node **a, t_node **b)
-{
-	if(lst_size(*a) > 3)
-	{
-		while (lst_size(*a) != 3)
-		{
-			int min_position = find_min_position(*a);
-			move_min_to_top(a, min_position);
-			pb(a, b, 1);
-			if (*a == NULL)
-				break;
-		}
-	}
-
-}
-static void push_all_a(t_node **a, t_node **b)
-{
-	while (*b)
-	{
-		pa(a, b, 1);
-	}
-}
 void algo(t_node **a, t_node **b)
 {
-    //printf("stack a before push ----\n");
-    // ft_printList(*a);
-    // printf("stack b before push ----\n");
-    // printf("--------------\nstack a after sorted-------\n");
     if(lst_size(*a) > 1)
-	{
-		push_all_b(a, b);
-		if(lst_size(*a) == 3)
-			sort_tree(a);
-		if(lst_size(*b) != 0)
-			push_all_a(a, b);
-	}
-    //ft_printList(*a);
-    // printf("------------------\nstack b after sorted-------\n");
-    // ft_printList(*b);
-    ft_lstclear(a);
-	ft_lstclear(b);
+    {
+        push_all_to_b(a, b);
+        sort_tree(a);
+        while (*b)
+        {
+            fill_pos(*b);
+            fill_pos(*a);
+            target(*a, *b);
+            fill_cost(*a, *b);
+            apply_mouve(get_min_cost(*b), a, b);
+            pa(a, b, 1);
+        }
+        finalize_stack_a(a);
+    }
+
+}
+t_node	*ft_min_node(t_node *stack_a)
+{
+    t_node	*min_node;
+    int		position;
+
+    position = 0;
+    min_node = stack_a;
+    while (stack_a)
+    {
+        stack_a->pos = position++;
+        if (stack_a->data < min_node->data)
+            min_node = stack_a;
+        stack_a = stack_a->next;
+    }
+    return (min_node);
+}
+void	finalize_stack_a(t_node **stack_a)
+{
+    t_node	*min_node;
+    t_node	*temp;
+    int		min_position;
+
+    temp = *stack_a;
+    min_node = ft_min_node(temp);
+    min_position = min_node->pos;
+    if (min_position <= lst_size(*stack_a) / 2)
+    {
+        while (min_position-- > 0)
+            ra(stack_a, 1);
+    }
+    else
+    {
+        while (min_position++ < lst_size(*stack_a))
+            rra(stack_a, 1);
+    }
 }
 
+
+void apply_mouve(t_node *tomouve, t_node **stack_a, t_node **stack_b)
+{
+    int piva;
+    int pivb;
+
+    fill_pos(*stack_a);
+    fill_pos(*stack_b);
+    piva = lst_size(*stack_a) / 2;
+    pivb = lst_size(*stack_b) / 2;
+
+    while ((*stack_b != tomouve && tomouve->pos < pivb)
+        && (*stack_a != tomouve->target && tomouve->target->pos < piva))
+        rr(stack_a, stack_b, 1);
+
+    while ((*stack_b != tomouve && tomouve->pos >= pivb)
+        && (*stack_a != tomouve->target && tomouve->target->pos >= piva))
+        rrr(stack_a, stack_b, 1);
+
+    while (*stack_a != tomouve->target)
+    {
+        if (tomouve->target->pos < piva)
+            ra(stack_a, 1);
+        else
+            rra(stack_a, 1);
+    }
+    while (*stack_b != tomouve)
+    {
+        if (tomouve->pos < pivb)
+            rb(stack_b, 1);
+        else
+            rrb(stack_b, 1);
+    }
+}

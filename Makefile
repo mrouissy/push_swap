@@ -9,7 +9,7 @@ src =	push_swap.c \
 		utils/ft_split_str.c utils/ft_utils_str.c utils/utils_list.c \
 		parcing/input_check.c parcing/error.c \
 		sort/sort.c \
-		algo/turk.c 
+		algo/turk.c algo/target_node.c algo/cost.c 
 
 
 obj = $(src:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:32:29 by mrouissy          #+#    #+#             */
-/*   Updated: 2025/02/20 13:25:56 by mrouissy         ###   ########.fr       */
+/*   Updated: 2025/02/27 10:57:06 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ size_t ft_strlen(char *str)
 		i++;
 	return (i);
 }
-//./push_swap 4+5+6+7 error must hnadel
 long	ft_atol(char	*str)
 {
 	int	i;
@@ -50,7 +49,7 @@ long	ft_atol(char	*str)
 }
 int	ft_isdigit(char i)
 {
-	if ((i >= '0' && i <= '9') || i == '-' || i == '+' )
+	if (i >= '0' && i <= '9')
 		return (1);
 
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:32:43 by mrouissy          #+#    #+#             */
-/*   Updated: 2025/02/23 13:57:47 by mrouissy         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:23:59 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ typedef struct s_node
 {
 	int data;
 	int index;//rank
+	int cost;
+	int pos;
+	struct s_node *target;
 	struct s_node *next;
 
 } t_node;
@@ -61,14 +64,20 @@ int is_sorted(t_node *stack);
 void sort_tree(t_node **stack);
 void rank_stack(t_node *stack);
 //------------------------------//
+
 //algo--------------------------//
 void algo(t_node **a, t_node **b);
-
+void target(t_node *a,t_node *b);
+void fill_cost(t_node *a, t_node *b);
+t_node *get_min_cost(t_node *stack);
+t_node	*ft_min_node(t_node *stack_a);
+void	finalize_stack_a(t_node **stack_a);
+void apply_mouve(t_node *tomouve, t_node **stack_a, t_node **stack_b);
 //------------------------------//
 
 // str functions-----------------//
 void free_split(char **split);
-void handle_error(t_node **stack_a);
+void handle_error(t_node **stack_a, t_node **stack_b);
 size_t ft_strlen(char *str);
 char **ft_split(char *str, char c);
 long ft_atol(char *str);

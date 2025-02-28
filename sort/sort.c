@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 11:20:39 by mrouissy          #+#    #+#             */
+/*   Updated: 2025/02/27 11:20:40 by mrouissy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/push_swap.h"
 
 
@@ -34,22 +46,17 @@ static void	sort_three_elements(t_node **stack, int first, int second, int third
 		ra(stack, 1);
 	}
 	else if (first < second && second > third && first > third)
+	{
 		rra(stack, 1);
+	}
+	else if (first > second && second < third && first < third)
+		sa(stack, 1);
 	else
 		return;
 }
 
 void	sort_tree(t_node **stack)
 {
-	if (is_sorted(*stack))
-		return;
-
-	if(lst_size(*stack) == 2)
-	{
-		if ((*stack)->data > (*stack)->next->data)
-			sa(stack, 1);
-		return;
-	}
 	if (!stack || !(*stack) || !(*stack)->next || !(*stack)->next->next)
 		return;
 	int	first = (*stack)->data;
