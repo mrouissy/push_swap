@@ -37,7 +37,6 @@ int  fill_stack(t_node **stack, char *value);
 int lst_size(t_node *lst);
 void ft_add_back(t_node **lst, t_node *new);
 void ft_add_front(t_node **lst, t_node *new);
-void ft_printList(t_node *head);
 void ft_lstclear(t_node **lst);
 t_node *add_new(int val);
 void ft_push(t_node **from, t_node **to);
@@ -78,7 +77,7 @@ void apply_mouve(t_node *tomouve, t_node **stack_a, t_node **stack_b);
 // str functions-----------------//
 void free_split(char **split);
 void handle_error(t_node **stack_a, t_node **stack_b);
-size_t ft_strlen(char *str);
+int ft_strlen(char *str,int i);
 char **ft_split(char *str, char c);
 long ft_atol(char *str);
 int ft_isdigit(char i);

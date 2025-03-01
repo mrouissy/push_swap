@@ -24,7 +24,9 @@ t_node *add_new(int val)
 
 int lst_size(t_node *lst)
 {
-    int i = 0;
+    int i;
+
+	i = 0;
     while (lst)
     {
         i++;
@@ -46,7 +48,9 @@ t_node *ft_last(t_node *lst)
 
 int ft_size(t_node *lst)
 {
-	int i = 0;
+	int i;
+
+	i = 0;
 	while(lst)
 	{
 		i++;
@@ -57,7 +61,9 @@ int ft_size(t_node *lst)
 
 void ft_add_back(t_node **lst, t_node *new)
 {
-	t_node *lt = NULL;
+	t_node *lt;
+	
+	lt = NULL;
 	if(lst)
 	{
 		if(*lst)

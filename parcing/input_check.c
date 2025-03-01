@@ -45,18 +45,6 @@ int is_valid(char *str)
 	free_split(res);
 	return i;
 }
-// remove
-void ft_printList(t_node *head)
-{
-	//int i = 1;
-	while(head)
-	{
-		//printf ("%d->%d:%d--tar-->%d\n", i++, head->index, head->data, head->target ? head->target->data : -1);
-		printf("%d\n",head->data);
-		head = head->next;
-	}
-}
-
 int is_dup(t_node *stack,int data)
 {
 	while (stack)

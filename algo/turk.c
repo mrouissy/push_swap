@@ -97,6 +97,43 @@ void	finalize_stack_a(t_node **stack_a)
 }
 
 
+
+static void apply_rr(t_node *tomouve, t_node **stack_a, t_node **stack_b, int piva, int pivb)
+{
+    while ((*stack_b != tomouve && tomouve->pos < pivb)
+        && (*stack_a != tomouve->target && tomouve->target->pos < piva))
+        rr(stack_a, stack_b, 1);
+}
+
+static void apply_rrr(t_node *tomouve, t_node **stack_a, t_node **stack_b, int piva, int pivb)
+{
+    while ((*stack_b != tomouve && tomouve->pos >= pivb)
+        && (*stack_a != tomouve->target && tomouve->target->pos >= piva))
+        rrr(stack_a, stack_b, 1);
+}
+
+static void move_to_target(t_node **stack_a, t_node *target, int piva)
+{
+    while (*stack_a != target)
+    {
+        if (target->pos < piva)
+            ra(stack_a, 1);
+        else
+            rra(stack_a, 1);
+    }
+}
+
+static void move_to_tomouve(t_node **stack_b, t_node *tomouve, int pivb)
+{
+    while (*stack_b != tomouve)
+    {
+        if (tomouve->pos < pivb)
+            rb(stack_b, 1);
+        else
+            rrb(stack_b, 1);
+    }
+}
+
 void apply_mouve(t_node *tomouve, t_node **stack_a, t_node **stack_b)
 {
     int piva;
@@ -106,27 +143,8 @@ void apply_mouve(t_node *tomouve, t_node **stack_a, t_node **stack_b)
     fill_pos(*stack_b);
     piva = lst_size(*stack_a) / 2;
     pivb = lst_size(*stack_b) / 2;
-
-    while ((*stack_b != tomouve && tomouve->pos < pivb)
-        && (*stack_a != tomouve->target && tomouve->target->pos < piva))
-        rr(stack_a, stack_b, 1);
-
-    while ((*stack_b != tomouve && tomouve->pos >= pivb)
-        && (*stack_a != tomouve->target && tomouve->target->pos >= piva))
-        rrr(stack_a, stack_b, 1);
-
-    while (*stack_a != tomouve->target)
-    {
-        if (tomouve->target->pos < piva)
-            ra(stack_a, 1);
-        else
-            rra(stack_a, 1);
-    }
-    while (*stack_b != tomouve)
-    {
-        if (tomouve->pos < pivb)
-            rb(stack_b, 1);
-        else
-            rrb(stack_b, 1);
-    }
+    apply_rr(tomouve, stack_a, stack_b, piva, pivb);
+    apply_rrr(tomouve, stack_a, stack_b, piva, pivb);
+    move_to_target(stack_a, tomouve->target, piva);
+    move_to_tomouve(stack_b, tomouve, pivb);
 }

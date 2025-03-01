@@ -14,7 +14,13 @@
 
 static int ft_wc(char *str)
 {
-	int i = 0, wc = 0, in_word = 0;
+	int i;
+	int wc;
+	int in_word;
+
+	i = 0;
+	wc = 0;
+	in_word = 0;
 	while (str[i])
 	{
 		if (!(str[i] == ' ' || str[i] == '\t'))
@@ -32,50 +38,55 @@ static int ft_wc(char *str)
 	return (wc);
 }
 
-static int ft_wordlen(char *str, int i)
+
+int ft_strlen(char *str, int j)
 {
-	int len = 0;
-	while (str[i] && !(str[i] == ' ' || str[i] == '\t'))
-	{
+	int i;
+
+	i = j;
+	while (str[i])
 		i++;
-		len++;
-	}
-	return (len);
+	return (i);
+}
+
+static char *ft_strdup_word(char *str, char c, int *index)
+{
+	int len;
+	char *word;
+
+	len = ft_strlen(str, *index);
+	word = (char *)malloc(len + 1);
+	if (!word)
+		return (NULL);
+	int i = 0;
+	while (str[*index] && str[*index] != c)
+		word[i++] = str[(*index)++];
+	word[i] = '\0';
+	return (word);
 }
 
 char **ft_split(char *str, char c)
 {
-	int i = 0, j = 0, k, inword = 0;
-	char **res = (char **)malloc((ft_wc(str) + 1) * sizeof(char *));
+	int i = 0;
+	int j = 0;
+	char **res;
+
+	res = (char **)malloc((ft_wc(str) + 1) * sizeof(char *));
 	if (!res)
-		return (0);
+		return (NULL);
 	while (str[i])
 	{
 		if (str[i] != c)
 		{
-			if (!inword)
+			res[j] = ft_strdup_word(str, c, &i);
+			if (!res[j])
 			{
-				res[j] = (char *)malloc(ft_wordlen(str, i) + 1);
-				if (!res[j])
-				{
-					while (--j >= 0)
-						free(res[j]);
-					free(res);
-					return (NULL);
-				}
-				k = 0;
-				while (str[i] && str[i] != c)
-					res[j][k++] = str[i++];
-				res[j][k] = '\0';
-				j++;
-				inword = 1;
+				free_split(res);
 			}
+			j++;
 		}
 		else
-		{
-			inword = 0;
 			i++;
-		}
 	}
 	res[j] = NULL;
 	return (res);

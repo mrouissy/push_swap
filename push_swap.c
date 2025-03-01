@@ -12,11 +12,43 @@
 
 #include "headers/push_swap.h"
 
-int process_argument(t_node **stack_a,t_node **stack_b, char *arg)
+int process_single_argument(t_node **stack_a, t_node **stack_b, char *arg)
+{
+	if (!fill_stack(stack_a, arg))
+	{
+		handle_error(stack_a, stack_b);
+		return 0;
+	}
+	return 1;
+}
+
+int process_multiple_arguments(t_node **stack_a, t_node **stack_b, char *arg)
+{
+	char **multi = ft_split(arg, ' ');
+	int j = 0;
+
+	if (!multi)
+	{
+		handle_error(stack_a, stack_b);
+		return 0;
+	}
+	while (multi[j])
+	{
+		if (!fill_stack(stack_a, multi[j]))
+		{
+			free_split(multi);
+			handle_error(stack_a, stack_b);
+			return 0;
+		}
+		j++;
+	}
+	free_split(multi);
+	return 1;
+}
+
+int process_argument(t_node **stack_a, t_node **stack_b, char *arg)
 {
 	int valid = is_valid(arg);
-	char **multi;
-	int j;
 
 	if (valid == 0)
 	{
@@ -25,34 +57,12 @@ int process_argument(t_node **stack_a,t_node **stack_b, char *arg)
 	}
 	else if (valid == 1)
 	{
-		if (!fill_stack(stack_a, arg))
-		{
-			handle_error(stack_a, stack_b);
-			return 0;
-		}
+		return process_single_argument(stack_a, stack_b, arg);
 	}
 	else
 	{
-		multi = ft_split(arg, ' ');
-		if (!multi)
-		{
-			handle_error(stack_a, stack_b);
-			return 0;
-		}
-		j = 0;
-		while (j < valid)
-		{
-			if (!fill_stack(stack_a, multi[j]))
-			{
-				free_split(multi);
-				handle_error(stack_a, stack_b);
-				return 0;
-			}
-			j++;
-		}
-		free_split(multi);
+		return process_multiple_arguments(stack_a, stack_b, arg);
 	}
-	return 1;
 }
 
 int main(int ac, char **av)
@@ -78,12 +88,10 @@ int main(int ac, char **av)
         else
             algo(&stack_a, &stack_b);
     }
-	//ft_printList(stack_a);
     ft_lstclear(&stack_a);
     ft_lstclear(&stack_b);
     return 0;
 }
-// -5 - error must be write in  stderr
 //check leaks in without args
 // test 119 and 71
 //2147483647 9487 0 -2147483647 -2147483648 ==>119

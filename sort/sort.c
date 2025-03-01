@@ -57,11 +57,15 @@ static void	sort_three_elements(t_node **stack, int first, int second, int third
 
 void	sort_tree(t_node **stack)
 {
+	int	first;
+	int	second ;
+	int	third;
+
+	first = (*stack)->data;
+	second = (*stack)->next->data;
+	third = (*stack)->next->next->data;
 	if (!stack || !(*stack) || !(*stack)->next || !(*stack)->next->next)
 		return;
-	int	first = (*stack)->data;
-	int	second = (*stack)->next->data;
-	int	third = (*stack)->next->next->data;
 	sort_three_elements(stack, first, second, third);
 }
 void rank_stack(t_node *stack)

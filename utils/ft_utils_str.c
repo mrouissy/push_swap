@@ -12,13 +12,6 @@
 
 #include "../headers/push_swap.h"
 
-size_t ft_strlen(char *str)
-{
-	size_t i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 long	ft_atol(char	*str)
 {
 	int	i;

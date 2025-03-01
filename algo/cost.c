@@ -20,9 +20,6 @@ static int calculate_cost(t_node *stack_a, t_node *stack_b, int size_b)
     int pt;
     int cost;
 
-    if (!stack_a || !stack_b)
-        return INT_MAX; // Return a high cost if stacks are null
-
     b = size_b;
     a = lst_size(stack_a);
     pb = stack_b->pos;
@@ -49,7 +46,6 @@ void fill_cost(t_node *stack_a, t_node *stack_b)
 
     size_a = lst_size(stack_a);
     size_b = lst_size(stack_b);
-
     while (stack_b)
     {
         pb = stack_b->pos;
